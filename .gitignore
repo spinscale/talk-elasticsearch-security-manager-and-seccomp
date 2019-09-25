@@ -1,0 +1,5 @@
+.gradle
+build
+.idea
+seccomp-example-vm/ubuntu-xenial-16.04-cloudimg-console.log
+seccomp-example-vm/.vagrant/

@@ -1,0 +1,17 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'idea'
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'com.google.guava:guava:28.1-jre'
+    compile 'org.jooq:joor:0.9.7'
+
+    testImplementation 'junit:junit:4.12'
+}
+

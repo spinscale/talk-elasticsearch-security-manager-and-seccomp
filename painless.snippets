@@ -1,0 +1,75 @@
+DELETE foo
+
+PUT foo/_doc/1
+{
+  "foo" : "bar"
+}
+
+# recursive map
+GET foo/_search
+{
+  "query": {
+    "script": {
+      "script": """
+def a = [:];
+def b = [:];
+a.b = b;
+b.a = a;
+return a.toString() != "ABC"
+"""      
+    }
+  }
+}
+
+# system is still responsive
+GET /
+
+# while loop has no escape...
+GET foo/_search
+{
+  "query": {
+    "script": {
+      "script": """
+def a = 123;
+while (true) {
+  a++;
+  if (a  > Integer.MAX_VALUE) {
+    break;
+  }
+}
+return true;
+"""      
+    }
+  }
+}
+
+# for loop
+GET foo/_search
+{
+  "query": {
+    "script": {
+      "script": """
+for (def i = 0; i < 999999 ; i++) {}
+return true;
+"""      
+    }
+  }
+}
+
+
+# but wait, I can just add a lot of for loops, right?
+# for loop
+GET foo/_search
+{
+  "query": {
+    "script": {
+      "script": """
+for (def i = 0; i < 500000 ; i++) {}
+for (def i = 0; i < 500000 ; i++) {}
+return true;
+"""      
+    }
+  }
+}
+
+
